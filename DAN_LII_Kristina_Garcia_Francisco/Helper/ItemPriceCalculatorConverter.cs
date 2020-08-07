@@ -1,4 +1,4 @@
-﻿using DAN_LII_Kristina_Garcia_Francisco.Model;
+﻿using System;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -6,9 +6,9 @@ using System.Windows.Data;
 namespace DAN_LII_Kristina_Garcia_Francisco.Helper
 {
     /// <summary>
-    /// Convertes the id of the item to the price
+    /// Convertes price of the item
     /// </summary>
-    class ItemPriceConverter : IValueConverter
+    class ItemPriceCalculatorConverter : IValueConverter
     {
         /// <summary>
         /// Converts the parameter value into the item price
@@ -20,21 +20,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco.Helper
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Service service = new Service();
-
-            double orderPrice = 0;
-            for (int i = 0; i < service.GetAllShoppingCarts().Count; i++)
-            {
-                if (service.GetAllShoppingCarts()[i].ItemID == (int)value && service.GetAllShoppingCarts()[i].UserID == LoggedUser.CurrentUser.UserID)
-                {
-                    int index = service.GetAllItems().FindIndex(f => f.ItemID == service.GetAllShoppingCarts()[i].ItemID);
-                    double price = double.Parse(service.GetAllItems()[index].Price);
-                    orderPrice = orderPrice + (double)service.GetAllShoppingCarts()[i].Amount * price * 120 / 100;
-                    return orderPrice;
-                }
-            }
-
-            return value;
+            return System.Convert.ToDouble(value) * 120 /100;
         }
 
         /// <summary>

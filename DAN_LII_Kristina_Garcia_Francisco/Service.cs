@@ -422,7 +422,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco
             {
                 int index = service.GetAllItems().FindIndex(f => f.ItemID == service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID)[i].ItemID);
                 double price = double.Parse(service.GetAllItems()[index].Price);
-                orderPrice = orderPrice + (double)service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID)[i].Amount * price;
+                orderPrice = orderPrice + (double)service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID)[i].Amount * price * 120 / 100;
             }
             return orderPrice.ToString();
         }
@@ -436,10 +436,9 @@ namespace DAN_LII_Kristina_Garcia_Francisco
             Service service = new Service();
 
             int amount = 0;
-
             for (int i = 0; i < service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID).Count; i++)
-            {
-                amount++;
+            {                
+                amount = (int)service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID)[i].Amount + amount;
             }
             return amount;
         }
@@ -455,7 +454,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco
             for (int i = 0; i < service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID).Count; i++)
             {
                 int index = service.GetAllItems().FindIndex(f => f.ItemID == service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID)[i].ItemID);
-                cakeNames = service.GetAllItems()[index].ItemName + " ";
+                cakeNames =  service.GetAllItems()[index].ItemName + ", " + cakeNames;
             }
 
             return cakeNames;
