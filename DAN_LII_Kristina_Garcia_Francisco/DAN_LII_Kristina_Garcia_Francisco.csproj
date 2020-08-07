@@ -64,18 +64,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="LoggedUser.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\CakeOrderWindow.xaml.cs">
+      <DependentUpon>CakeOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="View\CakeOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\BirthdayDB.Context.cs">
@@ -83,10 +95,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BirthdayDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BirthdayDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BirthdayDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\BirthdayDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BirthdayDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblItem.cs">
+      <DependentUpon>BirthdayDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblOrder.cs">
+      <DependentUpon>BirthdayDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblShoppingCart.cs">
+      <DependentUpon>BirthdayDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblUser.cs">
+      <DependentUpon>BirthdayDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -129,6 +158,12 @@
     <Content Include="Model\BirthdayDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BirthdayDB.Context.cs</LastGenOutput>
+      <DependentUpon>BirthdayDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\BirthdayDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BirthdayDB.edmx</DependentUpon>
+      <LastGenOutput>BirthdayDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
