@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf8f831563ae435c9376c4c4ae373b81" Name="Diagram1">
+        <EntityTypeShape EntityType="BirthdayDBModel.tblItem" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BirthdayDBModel.tblOrder" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BirthdayDBModel.tblShoppingCart" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BirthdayDBModel.tblUser" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="BirthdayDBModel.FK__tblShoppi__ItemI__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="BirthdayDBModel.FK__tblOrder__UserID__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="BirthdayDBModel.FK__tblShoppi__UserI__6754599E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

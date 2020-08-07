@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BirthdayDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ItemType" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Price" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalPrice" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrderCreated" Type="date" Nullable="false" />
+          <Property Name="TotalCakesOrdered" Type="int" Nullable="false" />
+          <Property Name="AllCakes" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblShoppingCart">
+          <Key>
+            <PropertyRef Name="ShoppingCartID" />
+          </Key>
+          <Property Name="ShoppingCartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" />
+          <Property Name="UserAddress" Type="varchar" MaxLength="40" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="13" />
+        </EntityType>
+        <Association Name="FK__tblOrder__UserID__6B24EA82">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblShoppi__ItemI__68487DD7">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblShoppingCart" Type="Self.tblShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tblShoppingCart">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblShoppi__UserI__6754599E">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblShoppingCart" Type="Self.tblShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblShoppingCart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BirthdayDBModelStoreContainer">
+          <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblShoppingCart" EntityType="Self.tblShoppingCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblOrder__UserID__6B24EA82" Association="Self.FK__tblOrder__UserID__6B24EA82">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblOrder" EntitySet="tblOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblShoppi__ItemI__68487DD7" Association="Self.FK__tblShoppi__ItemI__68487DD7">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblShoppingCart" EntitySet="tblShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblShoppi__UserI__6754599E" Association="Self.FK__tblShoppi__UserI__6754599E">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblShoppingCart" EntitySet="tblShoppingCart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BirthdayDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemType" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblShoppingCarts" Relationship="Self.FK__tblShoppi__ItemI__68487DD7" FromRole="tblItem" ToRole="tblShoppingCart" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalPrice" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OrderCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalCakesOrdered" Type="Int32" Nullable="false" />
+          <Property Name="AllCakes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblOrder__UserID__6B24EA82" FromRole="tblOrder" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblShoppingCart">
+          <Key>
+            <PropertyRef Name="ShoppingCartID" />
+          </Key>
+          <Property Name="ShoppingCartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <NavigationProperty Name="tblItem" Relationship="Self.FK__tblShoppi__ItemI__68487DD7" FromRole="tblShoppingCart" ToRole="tblItem" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblShoppi__UserI__6754599E" FromRole="tblShoppingCart" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="UserAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblOrders" Relationship="Self.FK__tblOrder__UserID__6B24EA82" FromRole="tblUser" ToRole="tblOrder" />
+          <NavigationProperty Name="tblShoppingCarts" Relationship="Self.FK__tblShoppi__UserI__6754599E" FromRole="tblUser" ToRole="tblShoppingCart" />
+        </EntityType>
+        <Association Name="FK__tblShoppi__ItemI__68487DD7">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblShoppingCart" Type="Self.tblShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="tblShoppingCart">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblOrder__UserID__6B24EA82">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblOrder">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblShoppi__UserI__6754599E">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblShoppingCart" Type="Self.tblShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tblShoppingCart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BirthdayDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblItems" EntityType="Self.tblItem" />
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+          <EntitySet Name="tblShoppingCarts" EntityType="Self.tblShoppingCart" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK__tblShoppi__ItemI__68487DD7" Association="Self.FK__tblShoppi__ItemI__68487DD7">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblShoppingCart" EntitySet="tblShoppingCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblOrder__UserID__6B24EA82" Association="Self.FK__tblOrder__UserID__6B24EA82">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblOrder" EntitySet="tblOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblShoppi__UserI__6754599E" Association="Self.FK__tblShoppi__UserI__6754599E">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblShoppingCart" EntitySet="tblShoppingCarts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BirthdayDBModelStoreContainer" CdmEntityContainer="BirthdayDBEntities">
+          <EntitySetMapping Name="tblItems">
+            <EntityTypeMapping TypeName="BirthdayDBModel.tblItem">
+              <MappingFragment StoreEntitySet="tblItem">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="BirthdayDBModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OrderCreated" ColumnName="OrderCreated" />
+                <ScalarProperty Name="TotalCakesOrdered" ColumnName="TotalCakesOrdered" />
+                <ScalarProperty Name="AllCakes" ColumnName="AllCakes" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblShoppingCarts">
+            <EntityTypeMapping TypeName="BirthdayDBModel.tblShoppingCart">
+              <MappingFragment StoreEntitySet="tblShoppingCart">
+                <ScalarProperty Name="ShoppingCartID" ColumnName="ShoppingCartID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="BirthdayDBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
