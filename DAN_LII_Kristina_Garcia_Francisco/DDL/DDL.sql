@@ -45,3 +45,10 @@ CREATE TABLE tblOrder(
 	AllCakes VARCHAR (200)							NOT NULL,
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID),
 );
+
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Ljubavno gnezdo', 'Odrasle', '1000.00')
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Lincer', 'Odrasle','2000.00')
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Cheese cake', 'Odrasle', '1200.00')
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Doboš', 'Dete', '2500.00')
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Bomba', 'Dete', '800.00')
+INSERT INTO tblItem(ItemName, ItemType, Price) VALUES ('Kinder', 'Dete', '1100.00')

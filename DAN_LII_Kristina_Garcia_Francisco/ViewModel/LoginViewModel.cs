@@ -110,12 +110,16 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
                     {
                         UserID = UserList[i].UserID,
                         Username = UserList[i].Username,
-                        UserPassword = UserList[i].UserPassword
+                        UserPassword = UserList[i].UserPassword,
+                        FirstName = UserList[i].FirstName,
+                        LastName = UserList[i].LastName,
+                        UserAddress = UserList[i].UserAddress,
+                        PhoneNumber = UserList[i].PhoneNumber
                     };
 
                     InfoLabel = "Logged in";
                     found = true;
-                    CakeOrderWindow cake = new CakeOrderWindow();
+                    UserWindow cake = new UserWindow();
                     view.Close();
                     cake.Show();
                     break;
@@ -149,7 +153,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
                         UserPassword = User.UserPassword
                     };
 
-                    CakeOrderWindow cake = new CakeOrderWindow();
+                    UserWindow cake = new UserWindow();
                     view.Close();
                     cake.Show();
                 }

@@ -297,7 +297,6 @@ namespace DAN_LII_Kristina_Garcia_Francisco
                     }
                     else
                     {
-                        //TODO user edit
                         tblUser userToEdit = (from ss in context.tblUsers where ss.UserID == user.UserID select ss).First();
 
                         userToEdit.FirstName = user.FirstName;
