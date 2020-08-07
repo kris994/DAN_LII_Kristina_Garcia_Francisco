@@ -28,6 +28,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
             ShoppingCartList = service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID).ToList();
             UserList = service.GetAllUsers().ToList();
             InfoText();
+            CheckIfCartEmpty();
         }
         #endregion
 
@@ -184,6 +185,20 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
                 OnPropertyChanged("InfoLabel");
             }
         }
+
+        private Visibility cartVisibility;
+        public Visibility CartVisibility
+        {
+            get
+            {
+                return cartVisibility;
+            }
+            set
+            {
+                cartVisibility = value;
+                OnPropertyChanged("CartVisibility");
+            }
+        }
         #endregion
 
         public void InfoText()
@@ -195,6 +210,18 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
             else
             {
                 InfoLabel = "";
+            }
+        }
+
+        public void CheckIfCartEmpty()
+        {
+            if (ShoppingCartList.Any())
+            {
+                CartVisibility = Visibility.Visible;
+            }
+            else
+            {
+                CartVisibility = Visibility.Collapsed;
             }
         }
 
@@ -226,6 +253,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
                 service.AddItem(Item, LoggedUser.CurrentUser.UserID);
                 ShoppingCartList = service.GetAllUserShoppingCarts(LoggedUser.CurrentUser.UserID).ToList();
                 TotalLabel = service.TotalValue();
+                CheckIfCartEmpty();
             }
             catch (Exception ex)
             {
@@ -334,6 +362,7 @@ namespace DAN_LII_Kristina_Garcia_Francisco.ViewModel
 
                 ShoppingCartList.Clear();
                 ShoppingCartList.RemoveAll(i => i.UserID == LoggedUser.CurrentUser.UserID);
+                CheckIfCartEmpty();
             }
             catch (Exception ex)
             {
